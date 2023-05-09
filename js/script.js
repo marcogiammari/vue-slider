@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            autoplay: null, 
             currImg: 0,
             slides: [
                 {
@@ -49,6 +50,19 @@ createApp({
             let thumbClass = "thumb";
             i == this.currImg ? thumbClass += " active" : null;
             return thumbClass
+        }, 
+        setAutoplayOn() {
+            this.autoplay = setInterval(this.nextSlide, 3000); 
+        },
+        setAutoplayOff() {
+            clearInterval(this.autoplay)
+            this.autoplay = null;
         }
+    },
+    mounted() {
+        this.setAutoplayOn()
+    },
+    unmounted() {
+        this.setAutoplayOff()
     }
 }).mount("#app");
