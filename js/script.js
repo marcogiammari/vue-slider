@@ -37,17 +37,20 @@ createApp({
     methods: {
         nextSlide() {
             this.currImg++;
+            // se arriva all'ultima slide torna all'inizio
             this.currImg == this.slides.length ? this.currImg = 0 : null;
         },
         prevSlide() {
+            // se arriva alla prima slide torna alla fine
             this.currImg--;
             this.currImg == -1 ? this.currImg = this.slides.length-1 : null;
         },
         clickSlide(i) {
             this.currImg = i;
         },
-        isActive(i) {
+        setThumbClass(i) {
             let thumbClass = "thumb";
+            // se l'indice corrisponde all'immagine corrente prende la classe active
             i == this.currImg ? thumbClass += " active" : null;
             return thumbClass
         }, 
@@ -59,6 +62,7 @@ createApp({
             this.autoplay = null;
         }
     },
+    // fa partire l'autoplay al caricamento dell'app
     mounted() {
         this.setAutoplayOn()
     },
